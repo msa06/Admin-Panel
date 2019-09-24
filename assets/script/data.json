@@ -1,0 +1,45 @@
+{
+  "01": {
+    "courseID": "01",
+    "coursename": "UPSC",
+    "subjects": [
+      {
+        "subjectID": 1,
+        "subjectname": "Physics",
+        "topics": [
+          {
+            "topicID": 1,
+            "topicname": "Units And Measurement",
+            "videos": [
+              {
+                "videoUID": "UM1",
+                "videoname": "Units And Measurement Introduction",
+                "videoDescription": " ",
+                "videoURL": "ZgqH47_kBQE"
+              }
+            ],
+            "ebooks": [
+              {
+                "ebookUID": "UM1",
+                "ebookname": "IIT Units And Measurement Introduction eBook",
+                "ebookDescription": "NCERT book for Units And Measurement",
+                "ebookURL": "IIT Units and Measurement - Free NCERT eBook",
+                "ebookThumbnailUID": "1"
+              }
+            ],
+            "mcqs": [
+              {
+                "mcqUID": "UM1",
+                "isMcqSingleCorrect": true,
+                "mcquestion": "What is the unit for measuring the amplitude of a sound?",
+                "mcqOptions": ["Decibel", "Coulomb", "Hum", "Cycles"],
+                "mcqAnswer": [true, false, false, false],
+                "mcqSolution": "The unit for measuring the amplitude of sound is Decibel."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
