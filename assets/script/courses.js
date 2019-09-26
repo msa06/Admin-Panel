@@ -1,4 +1,4 @@
-const ref = firebase.database().ref("courses");
+const ref = firebase.database().ref("portal_db/courses");
 $(document).ready(function() {
   listCourses();
   // Add Course Btn Click

@@ -52,7 +52,7 @@
                         Course Material
                     </a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li class="active">
+                        <li>
                             <a href="subjects.html">
                                 <i class="fab fa-stripe-s"></i>
                                 Subjects
@@ -71,12 +71,12 @@
                             </a>
                         </li>
                         <li>
-                            <a href="videos.html"">
+                            <a href="videos.html">
                                 <i class=" fas fa-play-circle"></i>
                                 Video Lecture
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="mcq.html">
                                 <i class="fas fa-check-circle"></i>
                                 MCQs
@@ -118,7 +118,7 @@
                         <i class="fas fa-align-left"></i>
 
                     </button>
-                    <h4>Subjects</h4>
+                    <h4>MCQs</h4>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -142,136 +142,313 @@
             <div class="content-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <div class="form-inline">
-                                <label for="current_course_select" class="mr-2">
-                                    <h4>Select Current Course: </h4>
-                                </label>
-                                <select name="current_course_select" class="form-control">
-                                </select>
+                        <div class="col-md-12">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="current_course_select">
+                                        Select Course:
+                                    </label>
+                                    <select name="current_course_select" class="form-control">
+                                        <option selected disabled>Select Course</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="current_subject_select">
+                                        Select Subject:
+                                    </label>
+                                    <select name="current_subject_select" class="form-control">
+                                        <option selected disabled>Select Course First</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="current_course_select">
+                                        Select Chapter:
+                                    </label>
+                                    <select name="current_chapter_select" class="form-control">
+                                        <option selected disabled>Select Subject First</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="subject-row">
-                        <div class="row mt-4">
-                            <div class="col-md-6 text-center pl-4 pt-2">
-                                <h5>Subject List</h5>
-                            </div>
-                            <div class="col-md-6">
-                                <button class="btn btn-success ml-auto" id="addsubjectebtn" data-toggle="modal"
-                                    data-target="#addSubjectModal">Add Subject
-                                </button>
-                            </div>
+                </div>
+                <div class="container mcq-row">
+                    <div class="row mt-4">
+                        <div class="col-md-6 text-center pl-4 pt-2">
+                            <h5>MCQ Questions</h5>
                         </div>
-                        <div class="row mt-3">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Subject Name</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="courses-list">
-
-
-                                </tbody>
-                            </table>
+                        <div class="col-md-6">
+                            <button class="btn btn-success ml-auto" id="addmcqebtn" data-toggle="modal"
+                                data-target="#addMCQModal">New MCQ
+                            </button>
                         </div>
                     </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div id="mcq-list">
 
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
 
+        </div>
+    </div>
 
 
-            <!-- Add Subject MODAL -->
-            <div class="modal" id="addSubjectModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Add Subject</h5>
-                            <button class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="videoform">
 
 
-                                <div class="form-group">
-                                    <label for="video_title">Subject Name</label>
-                                    <input type="text" placeholder="Enter Subject Name" class="form-control"
-                                        name="subject_name">
-                                </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <input class="btn btn-primary" data-dismiss="modal" type="submit" value="Add Subject"
-                                id="subject-submit-btn">
-                        </div>
-                        </form>
-                    </div>
+    <!-- Add MCQ MODAL -->
+    <div class="modal" id="addMCQModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Question</h5>
+                    <button class="close" data-dismiss="modal">&times;</button>
                 </div>
-            </div>
-            <!-- Add Subject MODAL -->
-            <div class="modal" id="editSubjectModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Edit Subject</h5>
-                            <button class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-body">
+                    <form id="mcqform">
+
+
+                        <div class="form-group">
+                            <label for="video_title">Question</label>
+                            <textarea type="text" placeholder="Enter MCQ Question" class="form-control"
+                                name="mcq_question"></textarea>
                         </div>
-                        <div class="modal-body">
-                            <form id="videoform">
-
-
-                                <div class="form-group">
-                                    <label for="video_title">Subject Name</label>
-                                    <input type="text" placeholder="Enter Subject ID" class="form-control"
-                                        name="edit_subject_id" hidden>
-                                    <input type="text" placeholder="Enter Subject Name" class="form-control"
-                                        name="edit_subject_name">
-                                </div>
-
-
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">A</span>
+                            </div>
+                            <input class="form-control" type="text" placeholder="Option A" name="optionA">
                         </div>
-                        <div class="modal-footer">
-                            <input class="btn btn-warning" data-dismiss="modal" type="submit" value="Update Subject"
-                                id="subject-update-btn">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">B</span>
+                            </div>
+                            <input class="form-control" type="text" placeholder="Option B" name="optionB">
                         </div>
-                        </form>
-                    </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">C</span>
+                            </div>
+                            <input class="form-control" type="text" placeholder="Option C" name="optionC">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">D</span>
+                            </div>
+                            <input class="form-control" type="text" placeholder="Option D" name="optionD">
+                        </div>
+                        <div class=" form-row">
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="answerchoice" id="single"
+                                    value="single" checked>
+                                Single Answer
+                            </div>
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="answerchoice" id="multiple"
+                                    value="multiple">
+                                Multiple Answer
+                            </div>
+                        </div>
+                        <div class="form-row  mt-2 mx-2" id="single-answer">
+                            <span class="mr-2">Select Correct Answer : </span>
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="single-answer" id="inlineRadio1"
+                                    value="0">
+                                A
+                            </div>
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="single-answer" id="inlineRadio2"
+                                    value="1">
+                                B
+                            </div>
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="single-answer" id="inlineRadio1"
+                                    value="2">
+                                C
+                            </div>
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="single-answer" id="inlineRadio2"
+                                    value="3">
+                                D
+                            </div>
+                        </div>
+                        <div class="form-row mt-2 mx-2" id="multiple-answer">
+                            <span class="mr-2">Select Multiple Answer : </span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="multiple-answer" value="0">
+                                A
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="multiple-answer" value="1">
+                                B
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="multiple-answer" value="2">
+                                C
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="multiple-answer" value="3">
+                                D
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="video_title">Solution</label>
+                            <textarea type="text" placeholder="Enter Solution" class="form-control"
+                                name="mcq_solution"></textarea>
+                        </div>
+
+
                 </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" data-dismiss="modal" type="submit" value="Add MCQ"
+                        id="mcq-submit-btn">
+                </div>
+                </form>
             </div>
         </div>
+    </div>
+    <!-- EDIT MCQ MODAL -->
+    <div class="modal" id="editMCQModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Question</h5>
+                    <button class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="mcqform">
+
+                        <input class="form-control" type="text" placeholder="ID" id="mcqid" hidden>
+                        <div class="form-group">
+                            <label for="video_title">Question</label>
+                            <textarea type="text" placeholder="Enter MCQ Question" class="form-control"
+                                name="edit_mcq_question"></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">A</span>
+                            </div>
+                            <input class="form-control" type="text" placeholder="Option A" name="edit_optionA">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">B</span>
+                            </div>
+                            <input class="form-control" type="text" placeholder="Option B" name="edit_optionB">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">C</span>
+                            </div>
+                            <input class="form-control" type="text" placeholder="Option C" name="edit_optionC">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">D</span>
+                            </div>
+                            <input class="form-control" type="text" placeholder="Option D" name="edit_optionD">
+                        </div>
+                        <div class=" form-row">
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="edit_answerchoice" id="edit_single"
+                                    value="single" checked>
+                                Single Answer
+                            </div>
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="edit_answerchoice" id="edit_multiple"
+                                    value="multiple">
+                                Multiple Answer
+                            </div>
+                        </div>
+                        <div class="form-row  mt-2 mx-2" id="edit_single-answer">
+                            <span class="mr-2">Select Correct Answer : </span>
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="edit_single-answer" id="inlineRadio1"
+                                    value="0">
+                                A
+                            </div>
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="edit_single-answer" id="inlineRadio2"
+                                    value="1">
+                                B
+                            </div>
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="edit_single-answer" id="inlineRadio1"
+                                    value="2">
+                                C
+                            </div>
+                            <div class="form-check form-check-inline col">
+                                <input class="form-check-input" type="radio" name="edit_single-answer" id="inlineRadio2"
+                                    value="3">
+                                D
+                            </div>
+                        </div>
+                        <div class="form-row mt-2 mx-2" id="edit_multiple-answer">
+                            <span class="mr-2">Select Multiple Answer : </span>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="edit_multiple-answer" value="0">
+                                A
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="edit_multiple-answer" value="1">
+                                B
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="edit_multiple-answer" value="2">
+                                C
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="edit_multiple-answer" value="3">
+                                D
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="video_title">Solution</label>
+                            <textarea type="text" placeholder="Enter Solution" class="form-control"
+                                name="edit_mcq_solution"></textarea>
+                        </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-warning" data-dismiss="modal" type="submit" value="Update MCQ"
+                        id="mcq-update-btn">
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 
 
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
 
-        <script src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
-
-        <!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
 
-        <script src="../script/firebaseconfig.js"></script>
-        <script src="../script/app.js"></script>
+    <script src="../script/firebaseconfig.js"></script>
+    <script src="../script/app.js"></script>
 
-        <script src="../script/subjects.js"></script>
+    <script src="../script/mcq.js"></script>
 </body>
 
 </html>

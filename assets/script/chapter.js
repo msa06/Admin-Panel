@@ -38,7 +38,7 @@ function populateCourseSelectList() {
   $('select[name="current_course_select"]').html(`
     <option selected disabled>Select Courses</option>
     `);
-  let ref = firebase.database().ref("courses");
+  let ref = firebase.database().ref("portal_db/courses");
   ref.on("child_added", data => {
     let courses = data.val();
     // for (let k in courses) {
@@ -57,7 +57,7 @@ function populateSubjectSelectList() {
   // let courseID = findCourseByName(_coursename);
   let subref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects");
   subref.on("child_added", data => {
@@ -77,7 +77,7 @@ function addChapter() {
   };
   let chapref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects")
     .child(_subjectID)
@@ -95,7 +95,7 @@ function listChapterList() {
   $("#chapter-list").html("");
   let chapref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects")
     .child(_subjectID)
@@ -126,7 +126,7 @@ function editChapter(id) {
 
   let chapref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects")
     .child(_subjectID)
@@ -152,7 +152,7 @@ function updateChapter() {
 
   let chapref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects")
     .child(_subjectID)
@@ -176,7 +176,7 @@ function deleteChapter(id) {
     if (f == true) {
       let chapref = firebase
         .database()
-        .ref("courses")
+        .ref("portal_db/courses")
         .child(_courseID)
         .child("subjects")
         .child(_subjectID)
