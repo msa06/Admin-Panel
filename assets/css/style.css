@@ -78,6 +78,13 @@ i, span {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
+.profile h4 {
+    font-size: 18px;
+    margin-right: 0px;
+    /* margin-left: -25px; */
+    margin-top: 10px;
+}
+
 .wrapper {
     display: flex;
     width: 100%;
@@ -267,6 +274,14 @@ a.article, a.article:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.login-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25), 0 5px 8px rgba(0, 0, 0, 0.22);
 }
 
 label {
@@ -276,14 +291,35 @@ label {
 }
 
 .loginform input {
-    background: rgb(221, 221, 221);
+    /* background:  */
     color: rgb(90, 90, 90);
+    border-bottom: 1px solid rgb(221, 221, 221);
+    border-radius: 5px;
 }
 
 .loginbtn {
     font-size: 18px;
     margin-top: 5px;
     font-weight: bold;
+    border-radius: 22px;
+}
+
+.googlebtn {
+    font-family: inherit;
+    font-size: 16px;
+    margin: 8px;
+    margin-bottom: 14px;
+    padding: 8px 12px;
+    font-weight: bold;
+    background: #fff;
+    border-radius: 25px;
+    border: 1px solid #333;
+    color: #333;
+}
+
+.smalltext {
+    font-size: 12px;
+    color: rgb(65, 65, 65);
 }
 
 @media (max-width: 768px) {
@@ -353,3 +389,4 @@ label {
             width: 100%;
         }
     }
+}

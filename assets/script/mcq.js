@@ -77,7 +77,7 @@ function populateCourseSelectList() {
   $('select[name="current_course_select"]').html(`
     <option selected disabled>Select Courses</option>
     `);
-  let ref = firebase.database().ref("courses");
+  let ref = firebase.database().ref("portal_db/courses");
   ref.on("child_added", data => {
     let courses = data.val();
     // for (let k in courses) {
@@ -99,7 +99,7 @@ function populateSubjectSelectList() {
   // let courseID = findCourseByName(_coursename);
   let subref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects");
   subref.on("child_added", data => {
@@ -117,7 +117,7 @@ function populateChapterSelectList() {
   `);
   let topicref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects")
     .child(_subjectID)
@@ -136,7 +136,7 @@ function addMCQ() {
   let mcq = getInputValue();
   let mcqref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects")
     .child(_subjectID)
@@ -153,7 +153,7 @@ function listMCQList() {
   $("#mcq-list").html("");
   let mcqref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects")
     .child(_subjectID)
@@ -242,7 +242,7 @@ function editMCQ(id) {
   // Get the database Ref
   let mcqref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects")
     .child(_subjectID)
@@ -318,7 +318,7 @@ function updateMCQ() {
   console.log(mcq);
   let mcqref = firebase
     .database()
-    .ref("courses")
+    .ref("portal_db/courses")
     .child(_courseID)
     .child("subjects")
     .child(_subjectID)
@@ -383,7 +383,7 @@ function deleteMCQ(id) {
   if (f == true) {
     firebase
       .database()
-      .ref("courses")
+      .ref("portal_db/courses")
       .child(_courseID)
       .child("subjects")
       .child(_subjectID)

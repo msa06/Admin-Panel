@@ -28,7 +28,6 @@ function addCourse() {
   console.log("Added Course");
   coursename.val("");
   listCourses();
-  listCoursesSelectField();
 }
 
 // List All the Courses
