@@ -1,13 +1,21 @@
-let _coursename;
+let _courseID;
 
 $(document).ready(function() {
   // Populate the Select Subject List
   populateCourseSelectList();
   //   Hide the Subject Row
   $(".subject-row").hide();
+  // listSubjectList();
+
   $('select[name="current_course_select"]').on("change", function() {
-    _coursename = $(this).val();
+    _courseID = $(this).val();
+    // G_courses = _courseID;
     $(".subject-row").show();
+    // if (G_courses != undefined) {
+    //   $(
+    //     `select[name="current_course_select"] option[value="${G_courses}"]`
+    //   ).attr("selected", null);
+    // }
     listSubjectList();
   });
 
@@ -22,6 +30,36 @@ $(document).ready(function() {
     updateSubject();
     e.preventDefault();
   });
+
+  // Validation Rule
+  $("#addsubjectform").validate({
+    rules: {
+      subject_name: {
+        required: true,
+        minlength: 5
+      }
+    },
+    messages: {
+      subject_name: {
+        minlength: "Subject Name should be at least 5 characters"
+      }
+    }
+  });
+
+  // Edit Form Validation
+  $("#editcourseform").validate({
+    rules: {
+      edit_subject_name: {
+        required: true,
+        minlength: 5
+      }
+    },
+    messages: {
+      edit_subject_name: {
+        minlength: "Course Name should be at least 5 characters"
+      }
+    }
+  });
 });
 
 function populateCourseSelectList() {
@@ -30,13 +68,18 @@ function populateCourseSelectList() {
     <option selected disabled>Select Courses</option>
     `);
   let ref = firebase.database().ref("portal_db/courses");
-  ref.on("child_added", data => {
-    let courses = data.val();
+  ref.on("child_added", async data => {
+    let courses = await data.val();
     // for (let k in courses) {
     //   let course = courses[k];
     $('select[name="current_course_select"]').append(`
-            <option name="${courses.coursename}">${courses.coursename}</option>
+            <option value="${courses.courseID}">${courses.coursename}</option>
             `);
+    // }
+    // if (G_courses != undefined) {
+    //   $(
+    //     `select[name="current_course_select"] option[value="${G_courses}"]`
+    //   ).attr("selected", "selected");
     // }
   });
 }
@@ -48,11 +91,11 @@ function addSubject() {
   let subject = {
     subjectname: subjectname.val()
   };
-  let courseId = findCourseByName(_coursename);
+  // let courseId = findCourseByName(_coursename);
   let subref = firebase
     .database()
     .ref("portal_db/courses")
-    .child(courseId)
+    .child(_courseID)
     .child("subjects");
 
   subject.subjectID = subref.push().key;
@@ -82,15 +125,16 @@ function findCourseByName(name) {
 // Populate Subject List
 function listSubjectList() {
   $("#courses-list").html("");
-  let courseId = findCourseByName(_coursename);
+  // let courseId = findCourseByName(_coursename);
   let subref = firebase
     .database()
     .ref("portal_db/courses")
-    .child(courseId)
+    .child(_courseID)
     .child("subjects");
   let count = 1;
   subref.on("child_added", data => {
     let subject = data.val();
+    // console.log(subject);
     populateSubjectList(subject, count++);
   });
 }
@@ -115,12 +159,11 @@ function populateSubjectList(subject, count) {
 function editSubjects(id) {
   let subjectname = $('input[name="edit_subject_name"]');
   let subjectID = $('input[name="edit_subject_id"]');
-  console.log(subjectID);
-  let courseID = findCourseByName(_coursename);
+  // let courseID = findCourseByName(_coursename);
   let subref = firebase
     .database()
     .ref("portal_db/courses")
-    .child(courseID)
+    .child(_courseID)
     .child("subjects");
 
   subref.on("value", data => {
@@ -142,11 +185,11 @@ function editSubjects(id) {
 function updateSubject() {
   let subjectname = $('input[name="edit_subject_name"]');
   let subjectID = $('input[name="edit_subject_id"]');
-  let courseID = findCourseByName(_coursename);
+  // let courseID = findCourseByName(_coursename);
   let subref = firebase
     .database()
     .ref("portal_db/courses")
-    .child(courseID)
+    .child(_courseID)
     .child("subjects")
     .child(subjectID.val())
     .child("subjectname");
@@ -162,11 +205,11 @@ function deleteSubjects(id) {
   if (r == true) {
     let f = confirm("Are you Sure");
     if (f == true) {
-      let courseID = findCourseByName(_coursename);
+      // let courseID = findCourseByName(_coursename);
       let subref = firebase
         .database()
         .ref("portal_db/courses")
-        .child(courseID)
+        .child(_courseID)
         .child("subjects");
       subref.child(id).remove();
       listSubjectList();

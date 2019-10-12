@@ -24,7 +24,7 @@
             <div class="sidebar-header">
                 <a href="../../index.html">
                     <h3>StudyDuniya</h3>
-                    <h6>Admin Panel</h6>
+                    <h6 class="smalltext">Admin Panel</h6>
                 </a>
                 <strong>SD</strong>
             </div>
@@ -142,13 +142,19 @@
             <div class="content-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            <div class="form-row">
-                                <label for="current_course_select" class="mr-2">
-                                    Select Current Course:
-                                </label>
-                                <select name="current_course_select" class="form-control">
-                                </select>
+                        <div class="col-md-12">
+                            <div class="form-row justify-content-center">
+                                <div class="col-md-4 ">
+                                    <div class="form-group">
+                                        <label for="current_course_select" class="mr-2">
+                                            Select Current Course:
+                                        </label>
+                                        <select name="current_course_select" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -195,8 +201,9 @@
                             <h5 class="modal-title">Add Subject</h5>
                             <button class="close" data-dismiss="modal">&times;</button>
                         </div>
-                        <div class="modal-body">
-                            <form id="videoform">
+                        <form id="addsubjectform">
+                            <div class="modal-body">
+
 
 
                                 <div class="form-group">
@@ -206,11 +213,11 @@
                                 </div>
 
 
-                        </div>
-                        <div class="modal-footer">
-                            <input class="btn btn-primary" data-dismiss="modal" type="submit" value="Add Subject"
-                                id="subject-submit-btn">
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input class="btn btn-primary" data-dismiss="modal" type="submit" value="Add Subject"
+                                    id="subject-submit-btn">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -223,8 +230,9 @@
                             <h5 class="modal-title">Edit Subject</h5>
                             <button class="close" data-dismiss="modal">&times;</button>
                         </div>
-                        <div class="modal-body">
-                            <form id="videoform">
+                        <form id="editcourseform">
+                            <div class="modal-body">
+
 
 
                                 <div class="form-group">
@@ -236,11 +244,11 @@
                                 </div>
 
 
-                        </div>
-                        <div class="modal-footer">
-                            <input class="btn btn-warning" data-dismiss="modal" type="submit" value="Update Subject"
-                                id="subject-update-btn">
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input class="btn btn-warning" data-dismiss="modal" type="submit" value="Update Subject"
+                                    id="subject-update-btn">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -261,6 +269,7 @@
             crossorigin="anonymous"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
 

@@ -24,7 +24,7 @@
             <div class="sidebar-header">
                 <a href="../../index.html">
                     <h3>StudyDuniya</h3>
-                    <h6>Admin Panel</h6>
+                    <h6 class="smalltext">Admin Panel</h6>
                 </a>
                 <strong>SD</strong>
             </div>
@@ -207,8 +207,9 @@
                             <h5 class="modal-title">Add Chapter</h5>
                             <button class="close" data-dismiss="modal">&times;</button>
                         </div>
-                        <div class="modal-body">
-                            <form id="chapterform">
+                        <form id="addchapterform">
+                            <div class="modal-body">
+
 
 
                                 <div class="form-group">
@@ -218,11 +219,11 @@
                                 </div>
 
 
-                        </div>
-                        <div class="modal-footer">
-                            <input class="btn btn-primary" data-dismiss="modal" type="submit" value="Add Chapter"
-                                id="chapter-submit-btn">
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input class="btn btn-primary" data-dismiss="modal" type="submit" value="Add Chapter"
+                                    id="chapter-submit-btn">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -235,8 +236,9 @@
                             <h5 class="modal-title">Edit Chapter</h5>
                             <button class="close" data-dismiss="modal">&times;</button>
                         </div>
-                        <div class="modal-body">
-                            <form id="videoform">
+                        <form id="editchapterform">
+                            <div class="modal-body">
+
 
 
                                 <div class="form-group">
@@ -248,11 +250,11 @@
                                 </div>
 
 
-                        </div>
-                        <div class="modal-footer">
-                            <input class="btn btn-warning" data-dismiss="modal" type="submit" value="Update Chapter"
-                                id="chapter-update-btn">
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input class="btn btn-warning" data-dismiss="modal" type="submit" value="Update Chapter"
+                                    id="chapter-update-btn">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -273,6 +275,7 @@
             crossorigin="anonymous"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/6.6.2/firebase-app.js"></script>
 

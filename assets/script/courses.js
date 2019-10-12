@@ -8,9 +8,42 @@ $(document).ready(function() {
   });
 
   //   EDit Course Btn Click
+
   $("#edit-course-btn").on("click", e => {
     updateCourse();
     e.preventDefault();
+  });
+
+  // console.log($("#edit_course_title-error").css(" "));
+
+  // Validation Rule
+  $("#addcourseform").validate({
+    rules: {
+      course_title: {
+        required: true,
+        minlength: 3
+      }
+    },
+    messages: {
+      course_title: {
+        minlength: "Course Name should be at least 3 characters"
+      }
+    }
+  });
+
+  // Edit Form Validation
+  $("#editcourseform").validate({
+    rules: {
+      edit_course_title: {
+        required: true,
+        minlength: 3
+      }
+    },
+    messages: {
+      edit_course_title: {
+        minlength: "Course Name should be at least 3 characters"
+      }
+    }
   });
 });
 
@@ -18,7 +51,10 @@ $(document).ready(function() {
 function addCourse() {
   // get the data from form
   let coursename = $('input[name="course_title"]');
-
+  // if (coursename.val() == "") {
+  //   alert("Course name can't be empty");
+  //   return;
+  // }
   let course = {
     coursename: coursename.val()
   };
@@ -62,6 +98,7 @@ function populateCourseList(course, count) {
 function editCourses(id) {
   let coursename = $('input[name="edit_course_title"]');
   let courseID = $('input[name="edit_course_id"]');
+
   ref.on("value", function(data) {
     let courses = data.val();
     for (let key in courses) {
@@ -79,6 +116,11 @@ function editCourses(id) {
 function updateCourse() {
   let coursename = $('input[name="edit_course_title"]');
   let courseID = $('input[name="edit_course_id"]');
+  if (coursename.val() == "") {
+    alert("Course Name Cannot be Empty!");
+    return;
+  }
+
   ref
     .child(courseID.val())
     .child("coursename")

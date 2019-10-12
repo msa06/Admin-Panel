@@ -6,7 +6,7 @@ $(document).ready(function() {
   // Populate the Select Subject List
   populateCourseSelectList();
   //   Hide the Subject Row
-  // $(".mcq-row").hide();
+  $(".mcq-row").hide();
   $('select[name="current_course_select"]').on("change", function() {
     _courseID = $(this).val();
     // Populate the subject List

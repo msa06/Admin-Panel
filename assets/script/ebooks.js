@@ -37,6 +37,7 @@ $(document).ready(function() {
   //   Update Chapter Button
   $("#ebook-update-btn").on("click", function(e) {
     updateEbook();
+
     e.preventDefault();
   });
 });
@@ -102,30 +103,34 @@ function populateChapterSelectList() {
 }
 
 function addEbook() {
-  let ebookname = $('input[name="ebook_name"]');
-  let ebook_desc = $('input[name="ebook_desc"]');
-  let ebook_url = $('input[name="ebook_url"]');
+  let ebookname = $('input[name="ebook_name"]').val();
+  let ebook_desc = $('input[name="ebook_desc"]').val();
+  let ebook_url = $('input[name="ebook_url"]').val();
 
-  let ebook = {
-    ebookname: ebookname.val(),
-    ebookDescription: ebook_desc.val(),
-    ebookURL: ebook_url.val()
-  };
-  let ebookref = firebase
-    .database()
-    .ref("portal_db/courses")
-    .child(_courseID)
-    .child("subjects")
-    .child(_subjectID)
-    .child("topics")
-    .child(_topicID)
-    .child("ebooks");
+  if (ebookname != "" && ebook_url != "" && ebook_url != "") {
+    $("#ebook-update-btn").prop("disabled", false);
 
-  ebook.ebookUID = ebookref.push().key;
-  ebookref.child(ebook.ebookUID).set(ebook);
-  ebookname.val("");
-  ebook_desc.val("");
-  ebook_url.val("");
+    let ebook = {
+      ebookname: ebookname,
+      ebookDescription: ebook_desc,
+      ebookURL: ebook_url
+    };
+    let ebookref = firebase
+      .database()
+      .ref("portal_db/courses")
+      .child(_courseID)
+      .child("subjects")
+      .child(_subjectID)
+      .child("topics")
+      .child(_topicID)
+      .child("ebooks");
+
+    ebook.ebookUID = ebookref.push().key;
+    ebookref.child(ebook.ebookUID).set(ebook);
+    ebookname.val("");
+    ebook_desc.val("");
+    ebook_url.val("");
+  }
 }
 
 function listEbookList() {

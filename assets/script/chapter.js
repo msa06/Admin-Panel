@@ -31,6 +31,36 @@ $(document).ready(function() {
     updateChapter();
     e.preventDefault();
   });
+
+  // Validation Rule
+  $("#addchapterform").validate({
+    rules: {
+      chapter_name: {
+        required: true,
+        minlength: 5
+      }
+    },
+    messages: {
+      chapter_name: {
+        minlength: "Chapter Name should be at least 5 characters"
+      }
+    }
+  });
+
+  // Edit Form Validation
+  $("#editchapterform").validate({
+    rules: {
+      edit_chapter_name: {
+        required: true,
+        minlength: 5
+      }
+    },
+    messages: {
+      edit_chapter_name: {
+        minlength: "Chapter Name should be at least 5 characters"
+      }
+    }
+  });
 });
 
 function populateCourseSelectList() {
