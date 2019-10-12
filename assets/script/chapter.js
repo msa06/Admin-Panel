@@ -1,18 +1,28 @@
+//---------------------------------------------------------------------------------
+//    Global Variable
+//---------------------------------------------------------------------------------
 let _courseID;
 let _subjectID;
 
 $(document).ready(function() {
   // Populate the Select Subject List
   populateCourseSelectList();
+
   //   Hide the Subject Row
   $(".chapter-row").hide();
+
+  //---------------------------------------------------------------------------------
+  //    Event Change on the Course Selector
+  //---------------------------------------------------------------------------------
   $('select[name="current_course_select"]').on("change", function() {
     _courseID = $(this).val();
     // Populate the subject List
     populateSubjectSelectList();
   });
 
-  // When we change Subject
+  //---------------------------------------------------------------------------------
+  //    Event Change on the subject Selector
+  //---------------------------------------------------------------------------------
   $('select[name="current_subject_select"]').on("change", function() {
     _subjectID = $(this).val();
     // Show the Table
@@ -63,28 +73,29 @@ $(document).ready(function() {
   });
 });
 
+//---------------------------------------------------------------------------------
+//    Fetch the data from firebase and Populate the Courses Selector
+//---------------------------------------------------------------------------------
 function populateCourseSelectList() {
-  // $('select[name="current_course_select"]').html('');
   $('select[name="current_course_select"]').html(`
     <option selected disabled>Select Courses</option>
     `);
   let ref = firebase.database().ref("portal_db/courses");
   ref.on("child_added", data => {
     let courses = data.val();
-    // for (let k in courses) {
-    //   let course = courses[k];
     $('select[name="current_course_select"]').append(`
             <option value="${courses.courseID}">${courses.coursename}</option>
             `);
-    // }
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Fetch the data from firebase and Populate the Subject Selector
+//---------------------------------------------------------------------------------
 function populateSubjectSelectList() {
   $('select[name="current_subject_select"]').html(`
   <option selected disabled>Choose Subject</option>
   `);
-  // let courseID = findCourseByName(_coursename);
   let subref = firebase
     .database()
     .ref("portal_db/courses")
@@ -98,9 +109,10 @@ function populateSubjectSelectList() {
   });
 }
 
-// Add Subject
+//---------------------------------------------------------------------------------
+//    Add Chapter to the Firebase
+//---------------------------------------------------------------------------------
 function addChapter() {
-  // get the data from form
   let chaptername = $('input[name="chapter_name"]');
   let topic = {
     topicname: chaptername.val()
@@ -115,12 +127,13 @@ function addChapter() {
 
   topic.topicID = chapref.push().key;
   chapref.child(topic.topicID).set(topic);
-  //   console.log("subject Added");
   chaptername.val("");
   listChapterList();
 }
 
-// Populate Chapter List
+//---------------------------------------------------------------------------------
+//    List All Chapter on Firebase
+//---------------------------------------------------------------------------------
 function listChapterList() {
   $("#chapter-list").html("");
   let chapref = firebase
@@ -150,6 +163,9 @@ function listChapterList() {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Find the Selected Chapter using id and update the Form Fields
+//---------------------------------------------------------------------------------
 function editChapter(id) {
   let chaptername = $('input[name="edit_chapter_name"]');
   let chapterid = $('input[name="edit_chapter_id"]');
@@ -167,7 +183,6 @@ function editChapter(id) {
     for (let k in topics) {
       let topic = topics[k];
       if (topic.topicID == id) {
-        // console.log(topic.topicID, topic.topicname);
         chaptername.val(`${topic.topicname}`);
         chapterid.val(`${topic.topicID}`);
         break;
@@ -176,6 +191,9 @@ function editChapter(id) {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Update the Chapter details on Firebase
+//---------------------------------------------------------------------------------
 function updateChapter() {
   let chaptername = $('input[name="edit_chapter_name"]');
   let chapterid = $('input[name="edit_chapter_id"]');
@@ -196,7 +214,9 @@ function updateChapter() {
   chapterid.val("");
 }
 
-// Delete Chapter
+//---------------------------------------------------------------------------------
+//    Delete the Chapter using id and update the table
+//---------------------------------------------------------------------------------
 function deleteChapter(id) {
   let r = confirm(
     "Deleting a Chapter will delete All the Data Associated With It"

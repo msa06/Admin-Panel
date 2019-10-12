@@ -1,3 +1,6 @@
+//---------------------------------------------------------------------------------
+//    Global Variable
+//---------------------------------------------------------------------------------
 let _courseID;
 let _subjectID;
 let _topicID;
@@ -7,25 +10,33 @@ $(document).ready(function() {
   populateCourseSelectList();
   //   Hide the Subject Row
   $(".ebook-row").hide();
+
+  //---------------------------------------------------------------------------------
+  //    Event Change on the Course Selector
+  //---------------------------------------------------------------------------------
   $('select[name="current_course_select"]').on("change", function() {
     _courseID = $(this).val();
     // Populate the subject List
     populateSubjectSelectList();
   });
 
-  // When we change Subject
+  //---------------------------------------------------------------------------------
+  //    Event Change on the Subject Selector
+  //---------------------------------------------------------------------------------
   $('select[name="current_subject_select"]').on("change", function() {
     _subjectID = $(this).val();
 
     populateChapterSelectList();
   });
 
+  //---------------------------------------------------------------------------------
+  //    Event Change on the Chapter Selector
+  //---------------------------------------------------------------------------------
   $('select[name="current_chapter_select"]').on("change", function() {
     _topicID = $(this).val();
     // Show the Table
     $(".ebook-row").show();
     listEbookList();
-    // listVideoList();
   });
 
   //   Add Video Button
@@ -42,6 +53,9 @@ $(document).ready(function() {
   });
 });
 
+//---------------------------------------------------------------------------------
+//    Fetch the data from firebase and Populate the Courses Selector
+//---------------------------------------------------------------------------------
 function populateCourseSelectList() {
   // $('select[name="current_course_select"]').html('');
   $('select[name="current_course_select"]').html(`
@@ -59,6 +73,9 @@ function populateCourseSelectList() {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Fetch the data from firebase and Populate the Subject Selector
+//---------------------------------------------------------------------------------
 function populateSubjectSelectList() {
   $('select[name="current_subject_select"]').html(`
   <option selected disabled>Choose Subject</option>
@@ -81,6 +98,9 @@ function populateSubjectSelectList() {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Fetch the data from firebase and Populate the Subject Selector
+//---------------------------------------------------------------------------------
 function populateChapterSelectList() {
   $('select[name="current_chapter_select"]').html(`
   <option selected disabled>Choose Chapter</option>
@@ -102,6 +122,9 @@ function populateChapterSelectList() {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Add Ebook to the Firebase
+//---------------------------------------------------------------------------------
 function addEbook() {
   let ebookname = $('input[name="ebook_name"]').val();
   let ebook_desc = $('input[name="ebook_desc"]').val();
@@ -133,6 +156,9 @@ function addEbook() {
   }
 }
 
+//---------------------------------------------------------------------------------
+//    List All Ebook on Firebase
+//---------------------------------------------------------------------------------
 function listEbookList() {
   $("#ebook-list").html("");
   let ebookref = firebase
@@ -170,6 +196,9 @@ function listEbookList() {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Find the Selected Ebook using id and update the Form Fields
+//---------------------------------------------------------------------------------
 function editEbook(id) {
   let ebookname = $('input[name="edit_ebook_name"]');
   let ebookdesc = $('input[name="edit_ebook_desc"]');
@@ -201,6 +230,9 @@ function editEbook(id) {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Update the Ebook details on Firebase
+//---------------------------------------------------------------------------------
 function updateEbook() {
   let ebookname = $('input[name="edit_ebook_name"]');
   let ebookdesc = $('input[name="edit_ebook_desc"]');
@@ -234,6 +266,9 @@ function updateEbook() {
   ebookid.val("");
 }
 
+//---------------------------------------------------------------------------------
+//    Delete the Ebook using id and update the table
+//---------------------------------------------------------------------------------
 function deleteEbook(id) {
   let f = confirm("Are you Sure");
   if (f == true) {

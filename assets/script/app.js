@@ -8,9 +8,20 @@ $(document).ready(function() {
     $("#sidebar").toggleClass("active");
     $("#content").toggleClass("active");
   });
+
+  //---------------------------------------------------------------------------------
+  //    CAll Auth State FUNCTION to find the state of authentication
+  //---------------------------------------------------------------------------------
   checkAuthState();
+
+  //---------------------------------------------------------------------------------
+  //    Populate the Username field if user is logged in
+  //---------------------------------------------------------------------------------
   populateUserName();
 
+  //---------------------------------------------------------------------------------
+  //    Handle On Click Function for Log Out Button
+  //---------------------------------------------------------------------------------
   $(".logoutbtn").on("click", function(e) {
     e.preventDefault();
     firebase
@@ -27,53 +38,44 @@ $(document).ready(function() {
         }
       );
   });
-  populateNavCourseSelectList();
-  $("#nav_course_select").on("change", function() {
-    G_courses_ID = $(this).val();
-    // Populate the subject List
-    populateNavSubjectSelectList();
-  });
 });
 
+//---------------------------------------------------------------------------------
+//    Check Auth State Function Defination
+//---------------------------------------------------------------------------------
 function checkAuthState() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
       var email = user.email;
       var uid = user.uid;
-      // console.log(email, uid);
-      // console.log(window.location.href);
-
-      // ...
     } else {
-      // User is signed out.
-      console.log("user is log out");
-
-      // if (window.location.href == "http://127.0.0.1:5501/") {
-      //   // console.log(" in if here");
-      //   window.location.href = "./assets/pages/login.html";
-      // } else {
-      // console.log(" in else here");
+      // If The User is Logged Out then redirect the user to the login screen automatically
       window.location.href = "./login.html";
-      // }
-      // ...
     }
   });
 }
 
+//---------------------------------------------------------------------------------
+//    If the User is Logged in Populate the User Name
+//---------------------------------------------------------------------------------
 function populateUserName() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
       let email = user.email;
-      getUserByEmail(email);
+
+      setUserField(email);
     } else {
       // No user is signed in.
     }
   });
 }
 
-function getUserByEmail(email) {
+//---------------------------------------------------------------------------------
+//    Find the User with Given Email and Populate the Name of the user on the screens
+//---------------------------------------------------------------------------------
+function setUserField(email) {
   let adminref = firebase.database().ref("admin-user");
   let result;
   adminref.on("value", data => {
@@ -88,44 +90,4 @@ function getUserByEmail(email) {
     }
   });
   return result;
-}
-
-function populateNavCourseSelectList() {
-  // $('select[name="current_course_select"]').html('');
-  $("#nav_course_select").html(`
-    <option selected disabled>Select Courses</option>
-    `);
-  $("#nav_subject_select").html(`
-    <option selected disabled>Choose Course First</option>
-    `);
-  let ref = firebase.database().ref("portal_db/courses");
-  ref.on("child_added", data => {
-    let courses = data.val();
-    // for (let k in courses) {
-    //   let course = courses[k];
-    $("#nav_course_select").append(`
-            <option value="${courses.courseID}">${courses.coursename}</option>
-            `);
-    // }
-  });
-}
-
-function populateNavSubjectSelectList() {
-  $("#nav_subject_select").html(`
-  <option selected disabled>Choose Subject</option>
-  `);
-
-  // let courseID = findCourseByName(_coursename);
-  let subref = firebase
-    .database()
-    .ref("portal_db/courses")
-    .child(G_courses_ID)
-    .child("subjects");
-  subref.on("child_added", data => {
-    let subject = data.val();
-
-    $("#nav_subject_select").append(
-      `<option value="${subject.subjectID}">${subject.subjectname}</option>`
-    );
-  });
 }

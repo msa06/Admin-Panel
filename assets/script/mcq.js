@@ -1,3 +1,6 @@
+//---------------------------------------------------------------------------------
+//    Global Variable
+//---------------------------------------------------------------------------------
 let _courseID;
 let _subjectID;
 let _topicID;
@@ -5,21 +8,30 @@ let _topicID;
 $(document).ready(function() {
   // Populate the Select Subject List
   populateCourseSelectList();
+
   //   Hide the Subject Row
   $(".mcq-row").hide();
+
+  //---------------------------------------------------------------------------------
+  //    Event Change on the Course Selector
+  //---------------------------------------------------------------------------------
   $('select[name="current_course_select"]').on("change", function() {
     _courseID = $(this).val();
     // Populate the subject List
     populateSubjectSelectList();
   });
 
-  // When we change Subject
+  ///---------------------------------------------------------------------------------
+  //    Event Change on the Subject Selector
+  //---------------------------------------------------------------------------------
   $('select[name="current_subject_select"]').on("change", function() {
     _subjectID = $(this).val();
-
     populateChapterSelectList();
   });
 
+  //---------------------------------------------------------------------------------
+  //    Event Change on the Chapter Selector
+  //---------------------------------------------------------------------------------
   $('select[name="current_chapter_select"]').on("change", function() {
     _topicID = $(this).val();
     // Show the Table
@@ -72,6 +84,9 @@ $(document).ready(function() {
   });
 });
 
+//---------------------------------------------------------------------------------
+//    Fetch the data from firebase and Populate the Courses Selector
+//---------------------------------------------------------------------------------
 function populateCourseSelectList() {
   // $('select[name="current_course_select"]').html('');
   $('select[name="current_course_select"]').html(`
@@ -89,6 +104,9 @@ function populateCourseSelectList() {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Fetch the data from firebase and Populate the Subject Selector
+//---------------------------------------------------------------------------------
 function populateSubjectSelectList() {
   $('select[name="current_subject_select"]').html(`
   <option selected disabled>Choose Subject</option>
@@ -111,6 +129,9 @@ function populateSubjectSelectList() {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Fetch the data from firebase and Populate the Subject Selector
+//---------------------------------------------------------------------------------
 function populateChapterSelectList() {
   $('select[name="current_chapter_select"]').html(`
   <option selected disabled>Choose Chapter</option>
@@ -132,6 +153,9 @@ function populateChapterSelectList() {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Add MCQ to the Firebase
+//---------------------------------------------------------------------------------
 function addMCQ() {
   let mcq = getInputValue();
   let mcqref = firebase
@@ -149,6 +173,9 @@ function addMCQ() {
   listMCQList();
 }
 
+//---------------------------------------------------------------------------------
+//    List All MCQ on Firebase
+//---------------------------------------------------------------------------------
 function listMCQList() {
   $("#mcq-list").html("");
   let mcqref = firebase
@@ -167,6 +194,9 @@ function listMCQList() {
   });
 }
 
+//---------------------------------------------------------------------------------
+//    Display One MCQ
+//---------------------------------------------------------------------------------
 function displayMCQ(mcq, qno) {
   $("#mcq-list").append(`
   <div class="card">
@@ -238,6 +268,9 @@ function getAnswer(mcq) {
   return answer;
 }
 
+//---------------------------------------------------------------------------------
+//    Find the Selected MCQ using id and update the Form Fields
+//---------------------------------------------------------------------------------
 function editMCQ(id) {
   // Get the database Ref
   let mcqref = firebase
@@ -313,6 +346,9 @@ function setEditModal(mcq) {
   }
 }
 
+//---------------------------------------------------------------------------------
+//    Update the MCQ details on Firebase
+//---------------------------------------------------------------------------------
 function updateMCQ() {
   let mcq = getEditInput();
   console.log(mcq);
@@ -378,6 +414,9 @@ function getEditInput() {
   return mcq;
 }
 
+//---------------------------------------------------------------------------------
+//    Delete the MCQ using id and update the table
+//---------------------------------------------------------------------------------
 function deleteMCQ(id) {
   let f = confirm("Are you Sure");
   if (f == true) {

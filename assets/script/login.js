@@ -1,11 +1,22 @@
 $(document).ready(function() {
+  //---------------------------------------------------------------------------------
+  //    Call Auth State to Check if the User is Logged in
+  //---------------------------------------------------------------------------------
   checkAuthState();
+
+  //---------------------------------------------------------------------------------
+  //    Handle to Login In
+  //---------------------------------------------------------------------------------
   $(".loginbtn").on("click", function(e) {
     handleLogIn();
     // checkAuthState();
     e.preventDefault();
   });
 });
+
+//---------------------------------------------------------------------------------
+//    Get the Log in Details and Sign in With Email and Password
+//---------------------------------------------------------------------------------
 function handleLogIn() {
   let email = $("#email").val();
   let password = $("#password").val();
@@ -43,6 +54,9 @@ function handleLogIn() {
   // [END authwithemail]
 }
 
+//---------------------------------------------------------------------------------
+//   Redirect User to Dashboard
+//---------------------------------------------------------------------------------
 function checkAuthState() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {

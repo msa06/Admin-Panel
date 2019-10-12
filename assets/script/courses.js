@@ -1,20 +1,25 @@
+//---------------------------------------------------------------------------------
+//    Global Ref to the Firebase
+//---------------------------------------------------------------------------------
 const ref = firebase.database().ref("portal_db/courses");
+
 $(document).ready(function() {
+  //---------------------------------------------------------------------------------
+  //    List All Courses
+  //---------------------------------------------------------------------------------
   listCourses();
+
   // Add Course Btn Click
   $("#add-course-btn").on("click", e => {
     addCourse();
     e.preventDefault();
   });
 
-  //   EDit Course Btn Click
-
+  //   Edit Course Btn Click
   $("#edit-course-btn").on("click", e => {
     updateCourse();
     e.preventDefault();
   });
-
-  // console.log($("#edit_course_title-error").css(" "));
 
   // Validation Rule
   $("#addcourseform").validate({
@@ -47,26 +52,24 @@ $(document).ready(function() {
   });
 });
 
-// ADD new Courses
+//---------------------------------------------------------------------------------
+//    Add Courses to Firebase
+//---------------------------------------------------------------------------------
 function addCourse() {
-  // get the data from form
   let coursename = $('input[name="course_title"]');
-  // if (coursename.val() == "") {
-  //   alert("Course name can't be empty");
-  //   return;
-  // }
   let course = {
     coursename: coursename.val()
   };
   course.courseID = ref.push().key;
-  //   console.log(course);
   ref.child(course.courseID).set(course);
   console.log("Added Course");
   coursename.val("");
   listCourses();
 }
 
-// List All the Courses
+//---------------------------------------------------------------------------------
+//    List Course To the DOM
+//---------------------------------------------------------------------------------
 function listCourses() {
   $("#courses-list").html("");
   let count = 1;
@@ -94,7 +97,9 @@ function populateCourseList(course, count) {
   `);
 }
 
-// Edit Courses List
+//---------------------------------------------------------------------------------
+//    Find the Selected Course using id and update the Form Fields
+//---------------------------------------------------------------------------------
 function editCourses(id) {
   let coursename = $('input[name="edit_course_title"]');
   let courseID = $('input[name="edit_course_id"]');
@@ -112,7 +117,9 @@ function editCourses(id) {
   });
 }
 
-// Function to update course
+//---------------------------------------------------------------------------------
+//    Update the Course details on Firebase
+//---------------------------------------------------------------------------------
 function updateCourse() {
   let coursename = $('input[name="edit_course_title"]');
   let courseID = $('input[name="edit_course_id"]');
@@ -128,7 +135,9 @@ function updateCourse() {
   listCourses();
 }
 
-// Delete the Courses
+//---------------------------------------------------------------------------------
+//    Delete the Course on Firebase
+//---------------------------------------------------------------------------------
 function deleteCourses(id) {
   let r = confirm(
     "Deleting a Courses will delete All the Data Associated With It"

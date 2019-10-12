@@ -1,5 +1,5 @@
 var current_page = 1;
-var records_per_page = 50;
+var records_per_page = 10;
 var users = [];
 let userref = firebase
   .database()
@@ -23,11 +23,11 @@ $(document).ready(function() {
     prevPage();
     e.preventDefault();
   });
-  $("#usertable").DataTable({
-    data: users,
-    paging: false,
-    info: false
-  });
+  // $("#usertable").DataTable({
+  //   data: users,
+  //   paging: false,
+  //   info: false
+  // });
 });
 
 function fetchUser() {
@@ -99,11 +99,11 @@ function ListUser(userref) {
       count++;
     }
 
-    $("#usertable").DataTable({
-      scrollY: 500,
-      paging: false
-    });
-    $("#pagination").show();
+    // $("#usertable").DataTable({
+    //   scrollY: 500,
+    //   paging: false
+    // });
+    // $("#pagination").show();
     // nextPage();
     // prevPage();
   });
